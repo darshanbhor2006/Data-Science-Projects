@@ -35,7 +35,7 @@ The project demonstrates the complete data analysis process from **raw data to m
 
 ---
 
-📂 Project Structure
+##📂 Project Structure
 Supermarket-Sales-Data-Analysis/
 │
 ├── .ipynb_checkpoints/
