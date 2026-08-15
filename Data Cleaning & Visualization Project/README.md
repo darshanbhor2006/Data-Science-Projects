@@ -42,7 +42,7 @@ The main objectives of this project are:
 ## 📂 Project Structure
 
 ```text
-Supermarket-Sales-Data-Analysis/
+Data Cleaning & Visualization Project/
 │
 ├── .ipynb_checkpoints/
 │
@@ -295,13 +295,13 @@ The dashboard provides a simple visual summary of the supermarket sales data.
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/Supermarket-Sales-Data-Analysis.git
+git clone https://github.com/darshanbhor2006/Data Cleaning & Visualization Project.git
 ```
 
 ### Step 2: Open the Project Folder
 
 ```bash
-cd Supermarket-Sales-Data-Analysis
+cd Data Cleaning & Visualization Project
 ```
 
 ### Step 3: Install Required Libraries
