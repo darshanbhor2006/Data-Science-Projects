@@ -4,38 +4,44 @@
 
 This project focuses on **Data Cleaning, Exploratory Data Analysis (EDA), and Data Visualization** using a supermarket sales dataset.
 
-The raw dataset is cleaned and processed using Python libraries such as **Pandas and NumPy**. After cleaning, different visualizations are created using **Matplotlib and Seaborn** to understand sales trends, customer behavior, product performance, and payment methods.
+The raw supermarket sales data is cleaned, processed, and analyzed using Python. Different attractive and colorful visualizations are created to understand **sales performance, customer behavior, product performance, payment methods, and sales trends**.
 
-The project demonstrates the complete data analysis process from **raw data to meaningful business insights**.
+The project demonstrates a complete data analysis workflow from **raw data → data cleaning → preprocessing → EDA → visualization → business insights**.
 
 ---
 
-## 🎯 Objectives
+## 🎯 Project Objectives
+
+The main objectives of this project are:
 
 * Clean and preprocess raw supermarket sales data.
-* Handle missing values.
-* Identify and remove duplicate records.
-* Detect and handle outliers.
+* Identify and handle missing values.
+* Detect and remove duplicate records.
+* Identify and handle outliers.
 * Convert and process date-related information.
 * Perform Exploratory Data Analysis (EDA).
+* Analyze sales and customer behavior.
 * Create attractive and colorful visualizations.
-* Identify important business insights.
-* Create a simple visual dashboard using Python.
+* Create a visual dashboard using Python.
+* Extract meaningful business insights from the data.
+* Save the cleaned dataset for further analysis.
 
 ---
 
 ## 🛠️ Technologies Used
 
 * **Python**
-* **Pandas** – Data manipulation and cleaning
-* **NumPy** – Numerical operations
+* **Pandas** – Data cleaning, manipulation, and analysis
+* **NumPy** – Numerical calculations
 * **Matplotlib** – Data visualization
 * **Seaborn** – Statistical visualization
-* **Jupyter Notebook** – Project development and analysis
+* **Jupyter Notebook** – Data analysis and project development
 
 ---
 
-##📂 Project Structure
+## 📂 Project Structure
+
+```text
 Supermarket-Sales-Data-Analysis/
 │
 ├── .ipynb_checkpoints/
@@ -53,11 +59,27 @@ Supermarket-Sales-Data-Analysis/
 └── README.md
 ```
 
+### 📁 File Description
+
+| File / Folder                                            | Description                                                                                     |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `.ipynb_checkpoints/`                                    | Automatically generated Jupyter Notebook checkpoint folder                                      |
+| `Supermarket Sales.csv`                                  | Original raw supermarket sales dataset                                                          |
+| `cleaned_sales.csv`                                      | Cleaned and processed dataset                                                                   |
+| `Data Visualization.png`                                 | Attractive and colorful final visualization/dashboard                                           |
+| `Supermarket Sales for Cleaning and Visualization.ipynb` | Main Jupyter Notebook containing data cleaning, preprocessing, EDA, visualization, and insights |
+| `requirements.txt`                                       | Contains the Python libraries required for the project                                          |
+| `README.md`                                              | Project documentation                                                                           |
+
 ---
 
 ## 📊 Dataset
 
-The project uses a **Supermarket Sales Dataset** containing information about:
+The project uses a **Supermarket Sales Dataset** containing information related to supermarket transactions and customers.
+
+The dataset contains **1,000 records and 20 columns**.
+
+### Main Dataset Features
 
 * Invoice ID
 * Branch
@@ -67,26 +89,25 @@ The project uses a **Supermarket Sales Dataset** containing information about:
 * Product Line
 * Unit Price
 * Quantity
-* Tax
-* Total Sales
+* Tax 5%
+* Total
 * Date
 * Time
-* Payment Method
-* Cost of Goods Sold (COGS)
+* Payment
+* COGS
+* Gross Margin Percentage
 * Gross Income
-* Customer Rating
-
-The dataset contains **1,000 records and 20 columns**.
+* Rating
 
 ---
 
 ## 🧹 Data Cleaning
 
-The following data-cleaning techniques were performed:
+Data cleaning is an important part of this project. The raw dataset was processed before performing visualization and analysis.
 
-### 1. Missing Values
+### 1. Handling Missing Values
 
-Missing values were identified using Pandas.
+Missing values were checked using Pandas.
 
 ```python
 df.isnull().sum()
@@ -94,100 +115,178 @@ df.isnull().sum()
 
 Numerical missing values were handled using the **median**, while categorical missing values were handled using the **mode**.
 
-### 2. Duplicate Records
+---
 
-Duplicate records were identified and removed.
+### 2. Removing Duplicate Records
+
+Duplicate records were identified using:
 
 ```python
 df.duplicated().sum()
 ```
 
+Duplicate records were removed using:
+
 ```python
-df.drop_duplicates()
+df = df.drop_duplicates()
 ```
+
+---
 
 ### 3. Date Conversion
 
-The Date column was converted into the proper datetime format.
+The `Date` column was converted into a proper datetime format.
 
 ```python
-df["Date"] = pd.to_datetime(df["Date"])
+df["Date"] = pd.to_datetime(
+    df["Date"],
+    errors="coerce"
+)
 ```
+
+Additional date-related features were created, such as:
+
+* Year
+* Month
+* Day
+* Day Name
+
+---
 
 ### 4. Outlier Detection
 
 Outliers were detected using the **IQR (Interquartile Range)** method.
 
-This helps identify unusually high or low sales values.
+The IQR method helps identify unusually high or low values in the sales data.
+
+```python
+Q1 = df["Total"].quantile(0.25)
+Q3 = df["Total"].quantile(0.75)
+
+IQR = Q3 - Q1
+
+lower_limit = Q1 - 1.5 * IQR
+upper_limit = Q3 + 1.5 * IQR
+```
+
+The cleaned dataset was then created by removing values outside the acceptable range.
 
 ---
 
-## 📈 Exploratory Data Analysis
+## 🔍 Exploratory Data Analysis (EDA)
 
-The project analyzes different aspects of supermarket sales, including:
+After cleaning the data, Exploratory Data Analysis was performed to understand patterns and relationships within the dataset.
 
-### 🛒 Sales by Product Line
+The project analyzes:
 
-Identifies which product categories generate the highest sales.
+### 🛒 1. Sales by Product Line
 
-### 🏢 Sales by Branch
+Analyzes which product categories generate the highest total sales.
 
-Compares the performance of different supermarket branches.
+### 🏢 2. Sales by Branch
 
-### 👥 Sales by Gender
+Compares the sales performance of different supermarket branches.
 
-Analyzes sales distribution between male and female customers.
+### 👥 3. Sales by Gender
 
-### 💳 Payment Method
+Analyzes the total sales generated by different customer genders.
 
-Shows which payment methods are most commonly used.
+### 💳 4. Payment Method Distribution
 
-### 📦 Quantity vs Total Sales
+Shows which payment methods are most frequently used by customers.
+
+### 📦 5. Quantity vs Total Sales
 
 Analyzes the relationship between the quantity purchased and total sales.
 
-### ⭐ Customer Ratings
+### ⭐ 6. Customer Rating Distribution
 
-Visualizes the distribution of customer ratings.
+Shows how customers rate their shopping experience.
 
-### 📅 Daily Sales Trend
+### 📈 7. Daily Sales Trend
 
-Shows how sales change over time.
+Analyzes how supermarket sales change over different dates.
 
-### 🔥 Correlation Heatmap
+### 🔥 8. Correlation Heatmap
 
-Shows relationships between numerical variables in the dataset.
+Shows the relationships between numerical variables in the dataset.
 
 ---
 
-## 📊 Dashboard
+## 📊 Data Visualization
 
-An attractive and colorful dashboard was created using **Matplotlib and Seaborn**.
+Attractive and colorful graphs were created using **Matplotlib and Seaborn**.
 
-The dashboard includes:
+The visualization includes:
 
-* 🛒 Product Line Sales
-* 🏢 Branch Sales
-* 💳 Payment Methods
-* ⭐ Customer Ratings
+* 🛒 Sales by Product Line
+* 🏢 Sales by Branch
+* 👥 Sales by Gender
+* 💳 Payment Method Distribution
+* 📦 Quantity vs Total Sales
+* ⭐ Customer Rating Distribution
+* 📈 Daily Sales Trend
+* 🔥 Correlation Heatmap
 
-The dashboard uses a **faint blue background and colorful charts** to make the visual report easy to understand.
+The final dashboard uses a **faint blue background with colorful charts and blue-themed titles** to make the visualizations attractive and easy to understand.
+
+---
+
+## 🖼️ Dashboard Preview
+
+The final visualization/dashboard is available in:
+
+```text
+Data Visualization.png
+```
+
+The dashboard provides a quick visual overview of:
+
+* Product line performance
+* Branch performance
+* Payment method distribution
+* Customer ratings
 
 ---
 
 ## 💡 Key Insights
 
-The project helps identify:
+This project helps identify important business insights such as:
 
-* Best-performing product categories
-* Highest-performing branch
-* Most-used payment method
-* Customer rating patterns
-* Relationship between quantity and sales
-* Overall sales trends
-* Relationships between numerical variables
+* Which product line performs best.
+* Which supermarket branch generates the highest sales.
+* Which payment method is most commonly used.
+* Customer rating distribution.
+* Relationship between quantity and total sales.
+* Daily sales trends.
+* Relationships between different numerical variables.
 
-These insights can help businesses understand customer behavior and improve sales strategies.
+These insights can help businesses understand customer behavior and make better data-driven decisions.
+
+---
+
+## 📈 Dashboard Features
+
+The dashboard provides a simple visual summary of the supermarket sales data.
+
+### Dashboard includes:
+
+```text
+🛒 Product Line Sales
+🏢 Branch Sales
+💳 Payment Methods
+⭐ Customer Ratings
+```
+
+### Design Features
+
+* Faint blue background
+* Colorful charts
+* Clear titles
+* Professional layout
+* Easy-to-read labels
+* Grid-based dashboard
+* Business-focused visualizations
 
 ---
 
@@ -199,7 +298,7 @@ These insights can help businesses understand customer behavior and improve sale
 git clone https://github.com/your-username/Supermarket-Sales-Data-Analysis.git
 ```
 
-### Step 2: Open the Project
+### Step 2: Open the Project Folder
 
 ```bash
 cd Supermarket-Sales-Data-Analysis
@@ -222,16 +321,16 @@ jupyter notebook
 Open:
 
 ```text
-supermarket_sales_data_cleaning_visualization.ipynb
+Supermarket Sales for Cleaning and Visualization.ipynb
 ```
 
-### Step 6: Run All Cells
+### Step 6: Run the Notebook
 
-Click:
+Run all cells in order using:
 
 **Kernel → Restart & Run All**
 
-or use:
+or select:
 
 **Run All**
 
@@ -239,7 +338,7 @@ or use:
 
 ## 📦 Requirements
 
-Create a `requirements.txt` file containing:
+The `requirements.txt` file contains the required Python libraries:
 
 ```text
 pandas
@@ -249,7 +348,7 @@ seaborn
 jupyter
 ```
 
-Install them using:
+Install all required libraries using:
 
 ```bash
 pip install -r requirements.txt
@@ -259,31 +358,39 @@ pip install -r requirements.txt
 
 ## 🎓 Learning Outcomes
 
-Through this project, I learned:
+By completing this project, I gained practical knowledge of:
 
+* Python for Data Science
+* Pandas
+* NumPy
 * Data Cleaning
 * Data Preprocessing
-* Handling Missing Values
-* Handling Duplicate Data
+* Missing Value Handling
+* Duplicate Detection
 * Outlier Detection
 * Exploratory Data Analysis
-* Data Visualization
 * Statistical Analysis
+* Data Visualization
+* Matplotlib
+* Seaborn
 * Data Storytelling
-* Creating Dashboards using Python
+* Dashboard Creation
+* Business Insight Generation
 
 ---
 
 ## 🔮 Future Improvements
 
-The project can be improved by:
+This project can be further improved by:
 
-* Creating an interactive **Streamlit dashboard**
-* Adding filters for Branch, City, Product Line, and Payment
-* Adding interactive charts
-* Adding sales prediction using Machine Learning
-* Deploying the dashboard online
-* Adding automated business reports
+* Creating an interactive **Streamlit dashboard**.
+* Adding filters for Branch, City, Product Line, Gender, and Payment.
+* Adding interactive charts.
+* Adding KPI cards such as Total Sales, Average Sales, and Total Transactions.
+* Implementing sales prediction using Machine Learning.
+* Adding customer segmentation.
+* Deploying the dashboard online.
+* Creating automated business reports.
 
 ---
 
@@ -297,6 +404,12 @@ Aspiring Data Scientist | Python | Machine Learning | Data Analytics
 
 ## ⭐ Conclusion
 
-This project demonstrates how raw supermarket sales data can be transformed into meaningful information through **data cleaning, analysis, visualization, and storytelling**.
+The **Supermarket Sales Data Cleaning & Visualization** project demonstrates how raw data can be transformed into meaningful business information through **data cleaning, preprocessing, exploratory analysis, visualization, and data storytelling**.
 
-It provides practical experience in using Python for real-world data analysis and helps understand how data-driven insights can support business decision-making.
+This project provides practical experience in using Python-based Data Science tools to analyze real-world sales data and generate useful insights for business decision-making.
+
+---
+
+## ⭐ If You Like This Project
+
+If you find this project useful or interesting, consider giving the repository a **⭐ Star** on GitHub.
