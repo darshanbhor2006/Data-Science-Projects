@@ -372,7 +372,7 @@ qualified healthcare professionals.
 **Darshan Bhor**
 
 💼 LinkedIn:
-https://www.linkedin.com/in/darshan-bhor
+https://www.linkedin.com/in/darshan-bhor-55ab22381 
 
 🐙 GitHub:
 https://github.com/darshanbhor2006
